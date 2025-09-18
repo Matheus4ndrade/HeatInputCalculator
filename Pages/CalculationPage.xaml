@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeatInputCalculator.CalculationPage">
+
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+
+        <Grid ColumnDefinitions="Auto,Auto,*,Auto" 
+              Padding="20,15"
+              BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#1A1A1A}">
+
+            <Image Source="hi_logo.png"
+                   HeightRequest="45"
+                   WidthRequest="45"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"/>
+
+            <Label Text="HEAT INPUT" 
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#6A0DAD"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Grid.Column="1"
+                   FontFamily="Bold"/>
+
+            <BoxView Grid.Column="2" Color="Transparent"/>
+
+            <Button x:Name="ThemeToggleBtn"
+                    Text="Alterar Tema"
+                    Clicked="OnThemeToggleClicked"
+                    Grid.Column="3"
+                    CornerRadius="20"
+                    Padding="20,12"
+                    BackgroundColor="#6A0DAD"
+                    TextColor="White"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    MinimumWidthRequest="120"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Start">
+                <Border 
+                    BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#2D2D2D}"
+                    Stroke="{AppThemeBinding Light=#D8BFD8, Dark=#4B0082}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="20"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+                    
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Amperagem (I)" 
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=White}"/>
+
+                        <Entry x:Name="entryAmperagem"
+                               Placeholder="Ex: 150"
+                               Keyboard="Numeric"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=White}"
+                               BackgroundColor="Transparent"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border 
+                    BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#2D2D2D}"
+                    Stroke="{AppThemeBinding Light=#D8BFD8, Dark=#4B0082}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="20"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Tensão (V)" 
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=White}"/>
+
+                        <Entry x:Name="entryTensao"
+                               Placeholder="Ex: 24"
+                               Keyboard="Numeric"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=White}"
+                               BackgroundColor="Transparent"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border 
+                    BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#2D2D2D}"
+                    Stroke="{AppThemeBinding Light=#D8BFD8, Dark=#4B0082}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="20"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Eficiência (η) %" 
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=White}"/>
+
+                        <Entry x:Name="entryEficiencia"
+                               Placeholder="Ex: 85"
+                               Keyboard="Numeric"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=White}"
+                               BackgroundColor="Transparent"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border 
+                    BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#2D2D2D}"
+                    Stroke="{AppThemeBinding Light=#D8BFD8, Dark=#4B0082}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="20"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="15">
+                            <Label Text="Velocidade de Soldagem" 
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#333333, Dark=White}"/>
+
+                            <Entry x:Name="entryVelocidade"
+                                   Placeholder="Ex: 10"
+                                   Keyboard="Numeric"
+                                   TextColor="{AppThemeBinding Light=#333333, Dark=White}"
+                                   BackgroundColor="Transparent"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="15">
+                            <Label Text="Unidade" 
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#333333, Dark=White}"/>
+
+                            <Picker x:Name="pickerUnidade"
+                                    WidthRequest="120"
+                                    HorizontalOptions="End"
+                                    BackgroundColor="{AppThemeBinding Light=#e0e0e0, Dark=#444444}"
+                                    TextColor="{AppThemeBinding Light=#333333, Dark=White}"
+                                    SelectedIndex="1">
+                                <Picker.Items>
+                                    <x:String>cm/s</x:String>
+                                    <x:String>cm/min</x:String>
+                                    <x:String>mm/min</x:String>
+                                    <x:String>mm/s</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Button x:Name="CalculateButton"
+                        Text="Calcular"
+                        Clicked="OnCalcularClicked"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        CornerRadius="25"
+                        Padding="40,18"
+                        BackgroundColor="#6A0DAD"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        WidthRequest="200"/>
+
+                <Border 
+                    BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#2D2D2D}"
+                    Stroke="{AppThemeBinding Light=#D8BFD8, Dark=#4B0082}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="30"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <Label x:Name="lblResultado"
+                           Text="Preencha os dados para calcular o Heat Input"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light=#333333, Dark=White}"
+                           LineBreakMode="WordWrap"/>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="2"
+                BackgroundColor="{AppThemeBinding Light=#E6E6FA, Dark=#2D2D2D}"
+                Stroke="Transparent"
+                Padding="20,15">
+            <Grid>
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Desenvolvido por Matheus de Andrade"
+                           FontSize="12"
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"
+                           HorizontalOptions="Center" />
+
+                    <HorizontalStackLayout Spacing="25" HorizontalOptions="Center">
+                        <ImageButton Source="linkedin.png"
+                                     Clicked="OnLinkedInClicked"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"/>
+                        <ImageButton Source="gmail.png"
+                                     Clicked="OnGmailClicked"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"/>
+                        <ImageButton Source="site.png"
+                                     Clicked="OnSiteClicked"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

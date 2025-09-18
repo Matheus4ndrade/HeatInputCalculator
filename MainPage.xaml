@@ -1,96 +1,116 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HeatInputCalculator.MainPage">
 
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+        <Grid ColumnDefinitions="Auto,Auto,*,Auto" 
+              Padding="20,15"
+              BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#1A1A1A}">
 
-        <VerticalStackLayout Padding="30"
-                             Spacing="25"
-                             VerticalOptions="Start"
-                             HorizontalOptions="Fill">
+            <Image Source="hi_logo.png"
+                   HeightRequest="45"
+                   WidthRequest="45"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Grid.Column="0"
+                   Margin="0,0,10,0"/>
 
-            <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center" HorizontalOptions="Fill">
-                <!-- centralizando -->
-                <Label Grid.Column="0"
-                       Text="Heat Input"
-                       Style="{StaticResource TitleLabel}"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"/>
-                <Frame Grid.Column="1"
-                       x:Name="toggleFrame"
-                       WidthRequest="60" HeightRequest="32" Padding="2"
-                       CornerRadius="16"
-                       BackgroundColor="{AppThemeBinding Light=#CCCCCC, Dark=#555555}"
-                       VerticalOptions="Center"
-                       HasShadow="False">
+            <Label Text="HEAT INPUT" 
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#6A0DAD"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Grid.Column="1"
+                   FontFamily="Bold"/>
 
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnToggleThemeClicked"/>
-                    </Frame.GestureRecognizers>
+            <BoxView Grid.Column="2" Color="Transparent"/>
 
-                    <Frame x:Name="toggleThumb"
-                           WidthRequest="28" HeightRequest="28"
-                           CornerRadius="14"
-                           BackgroundColor="White"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           TranslationX="0"/>
-                </Frame>
-            </Grid>
+            <Button x:Name="ThemeToggleBtn"
+                    Text="Alterar Tema"
+                    Clicked="OnThemeToggleClicked"
+                    Grid.Column="3"
+                    CornerRadius="20"
+                    Padding="20,12"
+                    BackgroundColor="#6A0DAD"
+                    TextColor="White"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    MinimumWidthRequest="120"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"/>
+        </Grid>
 
-            <Frame CornerRadius="15"
-                   Padding="20"
-                   HasShadow="True"
-                   BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundLight},
-                                                     Dark={StaticResource CardBackgroundDark}}">
-                <VerticalStackLayout Spacing="20">
-                    <Label Text="O Heat Input, ou energia de soldagem, é a quantidade de energia térmica fornecida ao material durante o processo de soldagem, calculada a partir da corrente elétrica, tensão, eficiência do processo e velocidade de soldagem. Entender o heat input é fundamental, pois influencia diretamente a microestrutura do material, a resistência mecânica da junta e a presença de deformações ou fissuras. Um controle adequado evita defeitos, reduz retrabalho e garante a qualidade do produto final.&#x0a;&#x0a;Essa é uma ferramenta prática que permite calcular rapidamente a energia aplicada em cada solda. Com ele, é possível planejar processos, comparar diferentes parâmetros de soldagem e prever efeitos térmicos no material. A aplicação facilita o entendimento do impacto de cada variável no resultado final, tornando o aprendizado e o controle industrial mais acessível. É recomendada para quem busca qualidade, segurança e eficiência em processos de soldagem, seja na prática industrial ou em estudos técnicos."
-                           Style="{StaticResource BodyLabel}"
-                           HorizontalTextAlignment="Center" />
-                </VerticalStackLayout>
-            </Frame>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="30" VerticalOptions="Center">
 
-            <Button Text="Usar"
-                    Clicked="OnUsarClicked"
-                    BackgroundColor="#2196F3"
+                <Border 
+                    BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#2D2D2D}"
+                    Stroke="{AppThemeBinding Light=#D8BFD8, Dark=#4B0082}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="30"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="800"
+                    MaximumWidthRequest="850">
+
+                    <Label Text="O Heat Input, ou energia de soldagem, é a quantidade de energia térmica fornecida ao material durante o processo de soldagem, calculada a partir da corrente elétrica, tensão, eficiência do processo e velocidade de soldagem. Entender o heat input é fundamental, pois influencia diretamente a microestrutura do material, a resistência mecânica da junta e a presença de deformações ou fissuras. Um controle adequado evita defeitos, reduz retrabalho e garante a qualidade do produto final."
+                           FontSize="16"
+                           TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap"/>
+                </Border>
+
+                <Button x:Name="StartButton"
+                    Text="Iniciar Cálculo do Heat Input"
+                    Clicked="OnStartCalculationClicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    CornerRadius="25"
+                    Padding="40,18"
+                    BackgroundColor="#6A0DAD"
                     TextColor="White"
                     FontAttributes="Bold"
-                    CornerRadius="10"
-                    Padding="10,8"
-                    WidthRequest="150"
-                    HorizontalOptions="Center"/>
-        </VerticalStackLayout>
+                    FontSize="16"
+                    WidthRequest="350"/>
 
-        <VerticalStackLayout Grid.Row="1"
-                             Padding="20"
-                             Spacing="10"
-                             VerticalOptions="End"
-                             HorizontalOptions="Center">
+            </VerticalStackLayout>
+        </ScrollView>
 
-            <Label Text="Desenvolvido por Matheus de Andrade"
-                   FontSize="14"
-                   TextColor="{AppThemeBinding Light={StaticResource SecondaryTextLight},
-                                                  Dark={StaticResource SecondaryTextDark}}"
-                   HorizontalOptions="Center" />
+        <Border Grid.Row="2"
+                BackgroundColor="{AppThemeBinding Light=#E6E6FA, Dark=#2D2D2D}"
+                Stroke="Transparent"
+                Padding="20,15">
+            <Grid>
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Desenvolvido por Matheus de Andrade"
+                           FontSize="12"
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#CCCCCC}"
+                           HorizontalOptions="Center" />
 
-            <HorizontalStackLayout Spacing="30"
-                                   HorizontalOptions="Center">
-                <ImageButton Source="linkedin.png"
-                             Clicked="OnLinkedInClicked"
-                             WidthRequest="32"
-                             HeightRequest="32"
-                             BackgroundColor="Transparent"/>
-                <ImageButton Source="gmail.png"
-                             Clicked="OnGmailClicked"
-                             WidthRequest="32"
-                             HeightRequest="32"
-                             BackgroundColor="Transparent"/>
-                <ImageButton Source="site.png"
-                             Clicked="OnSiteClicked"
-                             WidthRequest="32"
-                             HeightRequest="32"
-                             BackgroundColor="Transparent"/>
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="25" HorizontalOptions="Center">
+                        <ImageButton Source="linkedin.png"
+                                     Clicked="OnLinkedInClicked"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"/>
+                        <ImageButton Source="gmail.png"
+                                     Clicked="OnGmailClicked"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"/>
+                        <ImageButton Source="site.png"
+                                     Clicked="OnSiteClicked"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     BackgroundColor="Transparent"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
     </Grid>
 </ContentPage>

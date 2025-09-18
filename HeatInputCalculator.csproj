@@ -70,7 +70,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="CalculationPage.xaml.cs">
+	  <Compile Update="Pages\CalculationPage.xaml.cs">
 	    <DependentUpon>CalculationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Properties\Resources.Designer.cs">
@@ -88,7 +88,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="CalculationPage.xaml">
+	  <MauiXaml Update="Pages\CalculationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -1,27 +1,63 @@
-﻿using Microsoft.Maui.Controls;
-using System;
-using Microsoft.Maui.ApplicationModel;
-
-namespace HeatInputCalculator
+﻿namespace HeatInputCalculator
 {
     public partial class MainPage : ContentPage
     {
+        private bool _isDarkTheme = false;
+
         public MainPage()
         {
             InitializeComponent();
-            // Forçar tema inicial claro
-            App.Current.UserAppTheme = AppTheme.Light;
-
-            // Posicionar thumb à esquerda
-            toggleThumb.TranslationX = 0;
-
+            Application.Current.UserAppTheme = AppTheme.Light;
+            _isDarkTheme = false;
+            AddButtonEffects();
         }
 
-        private async void OnUsarClicked(object sender, EventArgs e)
+        private void AddButtonEffects()
+        {
+            ThemeToggleBtn.Pressed += OnButtonPressed;
+            ThemeToggleBtn.Released += OnButtonReleased;
+
+            StartButton.Pressed += OnButtonPressed;
+            StartButton.Released += OnButtonReleased;
+        }
+
+        private void RemoveButtonEffects()
+        {
+            ThemeToggleBtn.Pressed -= OnButtonPressed;
+            ThemeToggleBtn.Released -= OnButtonReleased;
+
+            StartButton.Pressed -= OnButtonPressed;
+            StartButton.Released -= OnButtonReleased;
+        }
+
+        private async void OnButtonPressed(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                await button.ScaleTo(0.97, 100, Easing.CubicOut);
+                button.Opacity = 0.9;
+            }
+        }
+
+        private async void OnButtonReleased(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                await button.ScaleTo(1.0, 100, Easing.CubicOut);
+                button.Opacity = 1.0;
+            }
+        }
+
+        private void OnThemeToggleClicked(object sender, EventArgs e)
+        {
+            _isDarkTheme = !_isDarkTheme;
+            Application.Current.UserAppTheme = _isDarkTheme ? AppTheme.Dark : AppTheme.Light;
+        }
+
+        private async void OnStartCalculationClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CalculationPage());
         }
-
 
         private async void OnLinkedInClicked(object sender, EventArgs e)
         {
@@ -34,7 +70,7 @@ namespace HeatInputCalculator
             {
                 var email = new EmailMessage
                 {
-                    Subject = "Contato via Heat Input",
+                    Subject = "Contato via Heat Input Calculator",
                     Body = "",
                     To = new List<string> { "matheus014ndrade@gmail.com" }
                 };
@@ -50,28 +86,15 @@ namespace HeatInputCalculator
             }
         }
 
-
         private async void OnSiteClicked(object sender, EventArgs e)
         {
             await Launcher.OpenAsync("https://drillweld.netlify.app/");
         }
 
-
-        private void OnToggleThemeClicked(object sender, EventArgs e)
+        protected override void OnDisappearing()
         {
-            if (App.Current.UserAppTheme == AppTheme.Dark)
-            {
-                App.Current.UserAppTheme = AppTheme.Light;
-                toggleThumb.TranslateTo(0, 0, 200, Easing.CubicInOut);
-            }
-            else
-            {
-                App.Current.UserAppTheme = AppTheme.Dark;
-                double endX = toggleFrame.Width - toggleThumb.Width - 4; // 4 = padding interno do Frame
-                toggleThumb.TranslateTo(endX, 0, 200, Easing.CubicInOut);
-            }
-
-
+            RemoveButtonEffects();
+            base.OnDisappearing();
         }
     }
 }
