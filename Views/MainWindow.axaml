@@ -1,0 +1,156 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="700"
+        x:Class="HeatInputCalculator.Views.MainWindow"
+        WindowState="Maximized"
+        Icon="/Assets/hi_logo.ico"
+        Title="Heat Input Calculator"
+        Width="900" Height="700"
+        MinWidth="600" MinHeight="500"
+        Background="#FFFFFF">
+
+    <Window.Styles>
+        <Style Selector="Button.primary-btn">
+            <Setter Property="Background" Value="#6A0DAD"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.1"/>
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.primary-btn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#7B1FA2"/> 
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.primary-btn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#4A0072"/> 
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.icon-btn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style Selector="Button.icon-btn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Opacity" Value="0.6"/>
+        </Style>
+        
+        <Style Selector="Button.icon-btn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Name="HeaderGrid" 
+              Grid.Row="0"
+              ColumnDefinitions="Auto,*,Auto" 
+              Margin="20,15"
+              Background="#F8F9FA">
+
+            <Image Grid.Column="0"
+                   Source="/Assets/hi_logo.png"
+                   Width="65"
+                   Height="65"
+                   Margin="0,0,15,0"
+                   VerticalAlignment="Center"/>
+
+            <TextBlock Text="HEAT INPUT" 
+                       Grid.Column="1"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#6A0DAD"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" 
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="30" 
+                        Spacing="30"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+
+                <Border Name="InfoBorder"
+                        BorderThickness="2"
+                        CornerRadius="16"
+                        Padding="30"
+                        MaxWidth="850"
+                        HorizontalAlignment="Center"
+                        Background="#F0F0F0"
+                        BorderBrush="#D8BFD8">
+                    
+                    <TextBlock Classes="info-text"
+                               FontSize="16"
+                               TextAlignment="Justify"
+                               TextWrapping="Wrap"
+                               LineHeight="24"
+                               Foreground="#333333"
+                               Text="O Heat Input, ou energia de soldagem, é a quantidade de energia térmica fornecida ao material durante o processo de soldagem, calculada a partir da corrente elétrica, tensão, eficiência do processo e velocidade de soldagem. Entender o heat input é fundamental, pois influencia diretamente a microestrutura do material, a resistência mecânica da junta e a presença de deformações ou fissuras. Um controle adequado evita defeitos, reduz retrabalho e garante a qualidade do produto final."/>
+                </Border>
+
+                <Button Name="StartButton"
+                        Classes="primary-btn"
+                        Content="Iniciar Cálculo do Heat Input"
+                        Padding="40,18"
+                        FontSize="16"
+                        Width="350"
+                        Height="60"
+                        HorizontalAlignment="Center"
+                        Click="OnStartCalculationClicked"/>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Name="FooterBorder"
+                Grid.Row="2"
+                Padding="20,15"
+                Background="#E6E6FA">
+            <StackPanel Spacing="10" 
+                        HorizontalAlignment="Center">
+                <TextBlock Classes="footer-text"
+                           FontSize="12"
+                           HorizontalAlignment="Center"
+                           Foreground="#666666"
+                           Text="Desenvolvido por Matheus de Andrade" />
+
+                <StackPanel Orientation="Horizontal" 
+                            Spacing="25" 
+                            HorizontalAlignment="Center">
+                    
+                    <Button Classes="icon-btn" Click="OnLinkedInClicked" ToolTip.Tip="LinkedIn">
+                        <Viewbox Width="30" Height="30">
+                            <Path Fill="#0077B5" Data="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/>
+                        </Viewbox>
+                    </Button>
+
+                    <Button Classes="icon-btn" Click="OnGmailClicked" ToolTip.Tip="Email">
+                        <Viewbox Width="30" Height="30">
+                            <Path Fill="#EA4335" Data="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                        </Viewbox>
+                    </Button>
+
+                    <Button Classes="icon-btn" Click="OnSiteClicked" ToolTip.Tip="Website">
+                        <Viewbox Width="30" Height="30">
+                            <Path Fill="#6A0DAD" Data="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+                        </Viewbox>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
